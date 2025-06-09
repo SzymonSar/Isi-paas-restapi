@@ -116,9 +116,10 @@ export class Main implements OnInit{
   }
 
   async Uzupelnij(){
-    this.Anazwa = this.danein[this.Aid].nazwa
-    this.Acena = this.danein[this.Aid].cena
-    this.Ailosc = this.danein[this.Aid].ilosc
+    
+    this.Anazwa = this.danein.find(item => item.id === this.Aid)?.nazwa
+    this.Acena = this.danein.find(item => item.id === this.Aid)?.cena
+    this.Ailosc = this.danein.find(item => item.id === this.Aid)?.ilosc
   }
 
 }
