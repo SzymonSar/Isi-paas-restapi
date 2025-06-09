@@ -115,4 +115,10 @@ export class Main implements OnInit{
     this.AxiosGet()
   }
 
+  async Uzupelnij(){
+    this.Anazwa = this.danein[this.Aid].nazwa
+    this.Acena = this.danein[this.Aid].cena
+    this.Ailosc = this.danein[this.Aid].ilosc
+  }
+
 }

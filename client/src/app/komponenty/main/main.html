@@ -8,7 +8,8 @@
 </form>
 <form (ngSubmit)="Aktualizuj()" #form="ngForm">
     <p>AKTUALIZUJ</p>
-    <input type="number" step="1" name="id" id="Aid" [(ngModel)]="Aid">id<br>
+    <input type="number" step="1" name="id" id="Aid" [(ngModel)]="Aid">id 
+    <button (click)="Uzupelnij()">Uzupelnij</button> <br>
     <input type="text" name="nazwa" id="Anazwa" [(ngModel)]="Anazwa">nazwa<br>
     <input type="number" step="0.01" name="cena" id="Acena" [(ngModel)]="Acena">cena<br>
     <input type="number" step="1" name="ilosc" id="Ailosc" [(ngModel)]="Ailosc">ilosc<br>
