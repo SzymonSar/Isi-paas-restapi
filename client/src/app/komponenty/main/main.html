@@ -1,8 +1,8 @@
 <p>BLOG</p>
 <form (ngSubmit)="Dodaj()" #form="ngForm">
-    <input type="text" name="user" id="user" [(ngModel)]="user">Uzytkownik
-    <input type="text" name="tytul" id="tytul" [(ngModel)]="tytul">Tytul
-    <input type="text" name="zawartosc" id="zawartosc" [(ngModel)]="zawartosc">Zawartosc
+    <input type="text" name="nazwa" id="nazwa" [(ngModel)]="nazwa">nazwa
+    <input type="number" step="0.01" name="cena" id="cena" [(ngModel)]="cena">cena
+    <input type="number" step="1" name="ilosc" id="ilosc" [(ngModel)]="ilosc">ilosc
     <button type="submit">Dodaj</button>
 </form>
 <div *ngFor="let item of danein">

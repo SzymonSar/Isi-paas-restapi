@@ -38,16 +38,16 @@ const pool = new Pool({
 
 app.get('/get-db', async (req, res) => {
   try {
-    const result = await pool.query('SELECT * from blog');
+    const result = await pool.query('SELECT * from ra');
     res.send(result.rows);
   } catch (err) {
     console.log('Tablica nie istnieje, tworze tablice')
     try{
-      const result = await pool.query(`CREATE TABLE blog (
+      const result = await pool.query(`CREATE TABLE ra (
          id SERIAL PRIMARY KEY,
-         owner TEXT NOT NULL,
-         tytul TEXT NOT NULL,
-         zawartosc TEXT NOT NULL
+         nazwa TEXT NOT NULL,
+         cena DOUBLE PRECISION NOT NULL,
+         ilosc INTEGER NOT NULL
          );`)
       res.status(200).send("Tabela zostala stworzona");
     }catch(err){
@@ -57,15 +57,61 @@ app.get('/get-db', async (req, res) => {
   }
 });
 
+
 app.post('/add-db', async (req, res) => {
-  const { owner, tytul, zawartosc } = req.body;
-  if (!owner || !tytul || !zawartosc) {
-    return res.status(400).send('Brakuje danych: owner, tytul lub zawartosc');
+  const { nazwa, ilosc, cena } = req.body;
+  if (!nazwa || !ilosc || !cena ) {
+    return res.status(400).send('Brakuje danych: nazwa, ilosc lub cena ');
   }
     try{
-      const result = await pool.query('INSERT INTO blog (owner, tytul, zawartosc) VALUES ($1, $2, $3)',
-      [owner, tytul, zawartosc])
+      const result = await pool.query('INSERT INTO ra (nazwa, ilosc, cena) VALUES ($1, $2, $3)',
+      [nazwa, ilosc, cena ])
       res.status(200).send("przedmiot zostal dodany");
+    }catch(err){
+    console.error('Błąd zapytania:', err);
+    res.status(500).send('Błąd połączenia z bazą danych');
+    }
+});
+
+
+app.put('/update-db', async (req, res) => {
+  const { id } = req.query;
+  const { nazwa, ilosc, cena } = req.body;
+
+  if (!id || !nazwa || !ilosc || !cena) {
+    return res.status(400).send('Brakuje danych: id, nazwa, ilosc lub cena');
+  }
+
+  try {
+    const result = await pool.query(
+      'UPDATE ra SET nazwa = $1, ilosc = $2, cena = $3 WHERE id = $4',
+      [nazwa, ilosc, cena, id]
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).send('Nie znaleziono rekordu o podanym ID');
+    }
+
+    res.status(200).send('Przedmiot został zaktualizowany');
+  } catch (err) {
+    console.error('Błąd zapytania:', err);
+    res.status(500).send('Błąd połączenia z bazą danych');
+  }
+});
+
+
+
+app.delete('/del-db', async (req, res) => {
+  const id = req.query.id;
+  if (!owner || !tytul || !zawartosc) {
+    return res.status(400).send('Brakuje danych: tytul lub zawartosc');
+  }
+    try{
+      const result = await pool.query('DELETE FROM todo WHERE id = $1', [id])
+      if (result.rowCount === 0) {
+      return res.status(404).send('Rekord nie znaleziony');
+      }
+      res.status(200).send("przedmiot zostal usuniety");
     }catch(err){
     console.error('Błąd zapytania:', err);
     res.status(500).send('Błąd połączenia z bazą danych');

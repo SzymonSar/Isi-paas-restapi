@@ -12,11 +12,11 @@ export class Main implements OnInit{
   ngOnInit(): void {
     this.AxiosGet();
   }
-  bazaurl = "https://isi-paas-blog.onrender.com/"
+  bazaurl = "https://isi-paas-restapi-serwer.onrender.com/"
   danein: any[] = []
-  user: string = "";
-  tytul: string = "";
-  zawartosc: string = "";
+  nazwa: string = "";
+  cena: number = 0.0;
+  ilosc: number = 0;
   AxiosGet = async () => {
     let client = axios.create({
       baseURL: this.bazaurl
@@ -35,9 +35,9 @@ export class Main implements OnInit{
       baseURL: this.bazaurl
     });
     const dane = {
-      owner: this.user,
-      tytul: this.tytul,
-      zawartosc: this.zawartosc
+      nazwa: this.nazwa,
+      cena: this.cena,
+      ilosc: this.ilosc
     }
     try {
       console.log(dane)
@@ -52,7 +52,7 @@ export class Main implements OnInit{
 
   async Dodaj(){
     console.log("dodaj dodaje")
-    if(this.user != "" && this.tytul != "" && this.zawartosc != "")
+    if(this.nazwa != "" && this.cena != 0.0 && this.ilosc != 0)
       {
       await this.AxiosPost()
     }
