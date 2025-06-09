@@ -8,19 +8,19 @@
 <table>
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Nazwa</th>
-      <th>Cena</th>
-      <th>Ilość</th>
-      <th>Akcje</th>
+      <th>   ID   </th>
+      <th>    Nazwa      </th>
+      <th>    Cena      </th>
+      <th>    Ilość   </th>
+      <th>   Akcje   </th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let item of danein">
       <td>{{ item.id }}</td>
       <td>{{ item.nazwa }}</td>
-      <td>{{ item.cena }}</td>
-      <td>{{ item.ilosc }}</td>
+      <td>{{ item.cena }}zl</td>
+      <td>x{{ item.ilosc }}</td>
       <td>
         <button (click)="Usun(item.id)">Usuń</button>
       </td>
