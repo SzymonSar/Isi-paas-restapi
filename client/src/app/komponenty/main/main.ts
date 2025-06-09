@@ -121,7 +121,7 @@ export class Main implements OnInit{
     this.Acena = this.danein.find(item => item.id === this.Aid)?.cena
     this.Ailosc = this.danein.find(item => item.id === this.Aid)?.ilosc
 
-    this.danein.sort((a, b) => a.id - b.id);
+    this.danein.sort((a, b) => b.id - a.id);
   }
 
 }
