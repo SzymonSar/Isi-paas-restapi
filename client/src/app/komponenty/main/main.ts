@@ -66,7 +66,7 @@ export class Main implements OnInit{
     }
     try {
       console.log(dane)
-      const response = await client.put(`/add-db?id=${this.Aid}`, dane, {
+      const response = await client.put(`/update-db?id=${this.Aid}`, dane, {
       headers: { 'Content-Type': 'application/json' }
     });
     console.log(response.status)
