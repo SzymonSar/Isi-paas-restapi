@@ -1,9 +1,18 @@
 <p>Restapi baza danych sklepu</p>
 <form (ngSubmit)="Dodaj()" #form="ngForm">
+    <p>DODAJ</p>
     <input type="text" name="nazwa" id="nazwa" [(ngModel)]="nazwa">nazwa<br>
     <input type="number" step="0.01" name="cena" id="cena" [(ngModel)]="cena">cena<br>
     <input type="number" step="1" name="ilosc" id="ilosc" [(ngModel)]="ilosc">ilosc<br>
     <button type="submit">Dodaj</button>
+</form>
+<form (ngSubmit)="Aktualizuj()" #form="ngForm">
+    <p>AKTUALIZUJ</p>
+    <input type="number" step="1" name="id" id="Aid" [(ngModel)]="Aid">id<br>
+    <input type="text" name="nazwa" id="Anazwa" [(ngModel)]="Anazwa">nazwa<br>
+    <input type="number" step="0.01" name="cena" id="Acena" [(ngModel)]="Acena">cena<br>
+    <input type="number" step="1" name="ilosc" id="Ailosc" [(ngModel)]="Ailosc">ilosc<br>
+    <button type="submit">aktualizuj</button>
 </form>
 <table>
   <thead>

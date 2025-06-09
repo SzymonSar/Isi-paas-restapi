@@ -17,6 +17,10 @@ export class Main implements OnInit{
   nazwa: string = "";
   cena: number = 0.0;
   ilosc: number = 0;
+  Aid: number = 0;
+  Anazwa: string = "";
+  Acena: number = 0.0;
+  Ailosc: number = 0;
   AxiosGet = async () => {
     let client = axios.create({
       baseURL: this.bazaurl
@@ -50,6 +54,28 @@ export class Main implements OnInit{
     }
   }
 
+
+  AxiosPut = async () => {
+    let client = axios.create({
+      baseURL: this.bazaurl
+    });
+    const dane = {
+      nazwa: this.Anazwa,
+      cena: this.Acena,
+      ilosc: this.Ailosc
+    }
+    try {
+      console.log(dane)
+      const response = await client.put(`/add-db?id=${this.Aid}`, dane, {
+      headers: { 'Content-Type': 'application/json' }
+    });
+    console.log(response.status)
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
+
+
      AxiosDelete = async (id: number) => {
     let client = axios.create({
       baseURL: this.bazaurl
@@ -80,5 +106,13 @@ export class Main implements OnInit{
     this.AxiosGet()
   }
 
+  async Aktualizuj(){
+    console.log("aktualizuj aktualizuje")
+    if(this.Aid != null && this.Anazwa != "" && this.Acena != 0.0 && this.Ailosc != null)
+      {
+      await this.AxiosPut()
+    }
+    this.AxiosGet()
+  }
 
 }
