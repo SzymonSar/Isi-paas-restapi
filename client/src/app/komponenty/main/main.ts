@@ -50,11 +50,32 @@ export class Main implements OnInit{
     }
   }
 
+     AxiosDelete = async (id: number) => {
+    let client = axios.create({
+      baseURL: this.bazaurl
+    });
+    try {
+      const response = await client.delete(`/del-db?id=${id}`);
+    console.log(response.status)
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
+
   async Dodaj(){
     console.log("dodaj dodaje")
     if(this.nazwa != "" && this.cena != 0.0 && this.ilosc != 0)
       {
       await this.AxiosPost()
+    }
+    this.AxiosGet()
+  }
+
+    async Usun( id: number){
+    console.log("usun usuwa")
+    if(id)
+      {
+      await this.AxiosDelete(id)
     }
     this.AxiosGet()
   }
